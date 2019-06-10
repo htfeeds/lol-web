@@ -1,0 +1,78 @@
+<div *ngIf="isSignedUp; else signupForm">
+  <div class="container loginscreen animated fadeInDown" style="padding-top:40px">
+    <div>
+      <h5 class="logo-name" style="font-size:100px">P2Tiger</h5>
+    </div>
+    <div>
+      <h3>Registration Successful</h3>
+      <p>Congratulations your event registration has been successful.</p>
+      <p>An email has been sent to your address confirming your participation.</p>
+      <p>If you do not receive the email please check your spam filter or contact us.</p>
+      <a class="btn btn-primary" routerLink="/login">Login</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #signupForm>
+  <div class="text-center animated fadeInDown">
+    <div class="text-center" style="padding-top:40px;">
+      <h1 class="logo-name">P2Tiger</h1>
+    </div>
+    <div class="middle-box loginscreen" style="padding-top:0px!important;">
+      <h3>Register to P2Tiger</h3>
+      <p>Create account to see it in action.</p>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate class="m-t">
+        <div class="form-group">
+          <input type="text" name="name" [(ngModel)]="form.name" #name="ngModel" class="form-control" placeholder="Name"
+            required minlength="3">
+          <div *ngIf="f.submitted && name.invalid">
+            <label *ngIf="name.errors.required" class="error" for="name">Name is required</label>
+            <label *ngIf="name.errors && name.errors.minlength" class="error" for="name">Name must be at least 3
+              characters</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
+            placeholder="Username" required minlength="6">
+          <div *ngIf="f.submitted && username.invalid">
+            <label *ngIf="username.errors.required" class="error" for="username">Username is required</label>
+            <label *ngIf="username.errors && username.errors.minlength" class="error" for="username">Username must be
+              at least 6
+              characters</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" placeholder="Email"
+            required email>
+          <div *ngIf="f.submitted && email.invalid">
+            <label *ngIf="email.errors.required" class="error" for="email">Email is required</label>
+            <label *ngIf="email.errors && email.errors.email" class="error" for="email">Email must be a valid email
+              address</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+            placeholder="Password" required minlength="6">
+          <div *ngIf="f.submitted && password.invalid">
+            <label *ngIf="password.errors.required" class="error" for="password">Password is required</label>
+            <label *ngIf="password.errors && password.errors.minlength" class="error" for="password">Password must be
+              at least 6
+              characters</label>
+          </div>
+        </div>
+        <p class="text-muted text-center">
+          <small>By clicking Sign Up, you agree to our Terms and that you have read our Data Policy, including our
+            Cookie Use.</small>
+        </p>
+        <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+        <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-danger">
+          Signup failed!<br />{{errorMessage}}
+        </div>
+
+        <p class="text-muted text-center"><small>Already have an account?</small></p>
+        <a class="btn btn-sm btn-white btn-block" routerLink="/login">Login</a>
+      </form>
+      <p class="m-t"> <small>Sign in to enjoy more features on P2Tiger &copy; 2018</small> </p>
+    </div>
+  </div>
+</ng-template>

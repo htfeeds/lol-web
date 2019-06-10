@@ -1,0 +1,7 @@
+.error {
+    text-align: left!important;
+    font-weight: normal;
+    color: #cc5965;
+    display: block;
+    margin-left: 5px;
+}
